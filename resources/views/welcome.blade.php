@@ -19,6 +19,23 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="https://js.pusher.com/8.4.0/pusher.min.js"></script>
+        <script>
+            Pusher.logToConsole = true;
+
+            var pusher = new Pusher('49eb043a4a67964064b0', {
+                cluster: 'ap1'
+            });
+            var channel = pusher.subscribe('popup-channel');
+            channel.bind('user-registered', function(data) {
+                console.log(data);
+                
+                toastr.success(data.name + ` has joined our website!`);
+            });
+        </script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     </head>
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
